@@ -13,7 +13,7 @@ class FuelPriceResource extends JsonResource
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return array<string, float|int|string|null>|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @return array<string, float|int|string|null>
      */
     public function toArray($request)
     {

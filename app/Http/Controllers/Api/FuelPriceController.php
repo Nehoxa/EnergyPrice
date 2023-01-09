@@ -20,10 +20,18 @@ class FuelPriceController extends Controller
         $filter = new FuelPriceFilter();
         $queryItems = $filter->transform($request); // [['column', 'operator', 'value']]
 
-        if (count($queryItems) == 0 ) {
-            return response(collect(FuelPriceResource::collection(FuelPrice::paginate()))->toArray());
+        if (count($queryItems) == 0) {
+            return response(
+                collect(
+                    FuelPriceResource::collection(FuelPrice::paginate())
+                )->toArray()
+            );
         } else {
-            return response(collect(FuelPriceResource::collection(FuelPrice::where($queryItems)->paginate()))->toArray());
+            return response(
+                collect(
+                    FuelPriceResource::collection(FuelPrice::where($queryItems)->paginate())
+                )->toArray()
+            );
         }
     }
 
@@ -46,7 +54,8 @@ class FuelPriceController extends Controller
      */
     public function show(FuelPrice $fuelPrice)
     {
-        return response(collect(new FuelPriceResource($fuelPrice))->toArray());
+        $resource[] = new FuelPriceResource($fuelPrice);
+        return response($resource);
     }
 
 //     /**

@@ -23,9 +23,17 @@ class ConsoElecGazController extends Controller
         if (count($queryItems) == 0) {
             // dd(ConsoElecGazResource::collection(ConsoElecGaz::paginate()))->toArray();
             // return ConsoElecGazResource::collection(ConsoElecGaz::paginate());
-            return response(collect(ConsoElecGazResource::collection(ConsoElecGaz::paginate()))->toArray());
+            return response(
+                collect(
+                    ConsoElecGazResource::collection(ConsoElecGaz::paginate())
+                )->toArray()
+            );
         } else {
-            return response(collect(ConsoElecGazResource::collection(ConsoElecGaz::where($queryItems)->paginate()))->toArray());
+            return response(
+                collect(
+                    ConsoElecGazResource::collection(ConsoElecGaz::where($queryItems)->paginate())
+                )->toArray()
+            );
         }
     }
 
@@ -48,8 +56,11 @@ class ConsoElecGazController extends Controller
      */
     public function show(ConsoElecGaz $consoElecGaz)
     {
-        // dd((new ConsoElecGazResource($consoElecGaz)));
-        return response(collect(new ConsoElecGazResource($consoElecGaz))->toArray());
+        // dd((new ConsoElecGazResource($consoElecGaz))->toArray($consoElecGaz));
+        // return response((new ConsoElecGazResource($consoElecGaz))->toArray($consoElecGaz));
+        // return response(new ConsoElecGazResource($consoElecGaz));
+        $resource[] = new ConsoElecGazResource($consoElecGaz);
+        return response($resource);
     }
 
     // /**
