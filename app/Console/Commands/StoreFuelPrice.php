@@ -3,10 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Models\FuelPrice;
+use App\Models\FuelType;
 use Illuminate\Console\Command;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Ramsey\Uuid\Type\Integer;
+
+use function PHPUnit\Framework\isEmpty;
 
 class StoreFuelPrice extends Command
 {
@@ -35,6 +38,8 @@ class StoreFuelPrice extends Command
 
         $counter = 0;
 
+        $types = FuelType::all()->pluck('name', 'id');
+
         foreach ($worksheet->getRowIterator() as $row) {
             if ($counter++ === 0) {
                 continue;
@@ -48,31 +53,42 @@ class StoreFuelPrice extends Command
                 $cells[] = $cell->getValue();
             }
 
-            FuelPrice::create([
-                'pump' => $cells[0],
-                'cp' => $cells[1],
-                'pop' => $cells[2],
-                'adresse' => $cells[3],
-                'ville' => $cells[4],
-                'horaires' => $cells[5],
-                'geom' => $cells[6],
-                'prix_maj' => $cells[7],
-                'prix_id' => $cells[8],
-                'prix_valeur' => $cells[9],
-                'prix_nom' => $cells[10],
-                'com_arm_code' => $cells[11],
-                'com_arm_name' => $cells[12],
-                'epci_code' => $cells[13],
-                'epci_name' => $cells[14],
-                'dep_code' => $cells[15],
-                'dep_name' => $cells[16],
-                'reg_code' => $cells[17],
-                'reg_name' => $cells[18],
-                'com_code' => $cells[19],
-                'com_name' => $cells[20],
-                'services_service' => $cells[21],
-                'horaires_automate_24_24' => $cells[22],
-            ]);
+            if (!is_null($cells[8]) && !$types->has($cells[8])) {
+                FuelType::create([
+                    'id' => $cells[8],
+                    'name' => $cells[10]
+                ]);
+
+                $types[$cells[8]] = $cells[10];
+            }
+
+
+            if (!is_null($cells[8])) {
+                FuelPrice::create([
+                    'pump' => $cells[0],
+                    'cp' => $cells[1],
+                    'pop' => $cells[2],
+                    'adresse' => $cells[3],
+                    'ville' => $cells[4],
+                    'horaires' => $cells[5],
+                    'geom' => $cells[6],
+                    'prix_maj' => $cells[7],
+                    'fuel_type_id' => $cells[8],
+                    'prix_valeur' => $cells[9],
+                    'com_arm_code' => $cells[11],
+                    'com_arm_name' => $cells[12],
+                    'epci_code' => $cells[13],
+                    'epci_name' => $cells[14],
+                    'dep_code' => $cells[15],
+                    'dep_name' => $cells[16],
+                    'reg_code' => $cells[17],
+                    'reg_name' => $cells[18],
+                    'com_code' => $cells[19],
+                    'com_name' => $cells[20],
+                    'services_service' => $cells[21],
+                    'horaires_automate_24_24' => $cells[22],
+                ]);
+            }
         }
 
         $this->comment('Prix enregistrés avec succès');

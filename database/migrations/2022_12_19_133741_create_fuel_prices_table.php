@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\FuelType;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,9 +24,8 @@ return new class () extends Migration {
             $table->text('horaires')->nullable();
             $table->string('geom')->nullable();
             $table->dateTime('prix_maj')->nullable();
-            $table->integer('prix_id')->nullable();
+            $table->foreignIdFor(FuelType::class)->constrained()->nullable();
             $table->unsignedDecimal('prix_valeur', 5, 3)->nullable();
-            $table->string('prix_nom')->nullable();
             $table->string('com_arm_code')->nullable();
             $table->string('com_arm_name')->nullable();
             $table->integer('epci_code')->nullable();

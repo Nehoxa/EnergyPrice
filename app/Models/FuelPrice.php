@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FuelPrice extends Model
 {
@@ -18,9 +19,8 @@ class FuelPrice extends Model
         'horaires',
         'geom',
         'prix_maj',
-        'prix_id',
+        'fuel_type_id',
         'prix_valeur',
-        'prix_nom',
         'com_arm_code',
         'com_arm_name',
         'epci_code',
@@ -42,4 +42,9 @@ class FuelPrice extends Model
         'prix_valeur' => 'decimal',
         'prix_maj' => 'datetime',
     ];
+
+    public function fuleType(): HasOne
+    {
+        return $this->hasOne(FuelType::class);
+    }
 }
