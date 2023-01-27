@@ -1,6 +1,3 @@
-
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-
 <template>
 
   <Head title="Edit Fuel Price" />
@@ -74,7 +71,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 
             <div class="mt-4">
               <InputLabel for="prix_valeur" value="Prix" />
-              <TextInput id="prix_valeur" type="text" class="mt-1 block w-full" v-model="form.prix_valeur" required />
+              <div class="flex items-center">
+                <TextInput id="prix_valeur" type="text" class="mt-1 block w-full" v-model="form.prix_valeur" required />
+                <p class="font-semibold mx-6">€</p>
+              </div>
               <InputError class="mt-2" :message="form.errors.prix_valeur" />
             </div>
 
@@ -83,12 +83,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
               <select id="fuel_type_id"
                 class="mt-1 block w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm"
                 v-model="form.fuel_type_id" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
+                  <option v-for="fueltype in fueltypes" :key="fueltype.id" :value="fueltype.id">{{ fueltype.name }}</option>
               </select>
               <InputError class="mt-2" :message="form.errors.fuel_type_id" />
             </div>
@@ -193,7 +188,8 @@ import TextInput from '@/Components/TextInput.vue';
 const form = useForm(props.fuelprice);
 
 const props = defineProps({
-  fuelprice: Object
+  fuelprice: Object,
+  fueltypes: Object,
 });
 
 const submit = () => {

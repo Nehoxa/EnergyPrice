@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Enums;
 
-enum FuelName: String 
+enum FuelId: String
 {
     case Gazole = 'Gazole';
     case SP95 = 'SP95';

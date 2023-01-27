@@ -21,9 +21,9 @@ class FuelPriceController extends Controller
      */
     public function index()
     {
-        $posts = FuelType::all();
+        $fueltypes = FuelType::all();
         $fuelprices = FuelPriceResource::collection(FuelPrice::paginate(10));
-        return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'posts'));
+        return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'fueltypes'));
     }
 
     // /**
@@ -66,7 +66,8 @@ class FuelPriceController extends Controller
      */
     public function edit(FuelPrice $fuelprice)
     {
-        return Inertia::render('Categories/FuelPrice/Edit', compact('fuelprice'));
+        $fueltypes = FuelType::all();
+        return Inertia::render('Categories/FuelPrice/Edit', compact('fuelprice', 'fueltypes'));
     }
 
     /**
@@ -74,7 +75,6 @@ class FuelPriceController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\FuelPrice  $fuelprice
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(FuelPriceRequest $request, FuelPrice $fuelprice)
     {

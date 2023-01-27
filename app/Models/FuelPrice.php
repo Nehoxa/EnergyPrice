@@ -43,7 +43,7 @@ class FuelPrice extends Model
         'prix_maj' => 'datetime',
     ];
 
-    public function fuleType(): HasOne
+    public function fuelType(): HasOne
     {
         return $this->hasOne(FuelType::class);
     }

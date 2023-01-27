@@ -19,7 +19,6 @@
       </div>
     </div>
 
-
     <div class="overflow-x-auto relative rounded-md m-6">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -68,7 +67,11 @@
               {{ fuelprice.ville }}
             </td>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              {{ fuelprice.FuelType }}
+              <div v-for="fueltype in fueltypes" :key="fueltype.id" >
+                <div v-if="fueltype.id === fuelprice.FuelType">
+                  {{ fueltype.name }}
+                </div>
+              </div>
             </td>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               {{ fuelprice.prixValeur }} €
@@ -113,9 +116,11 @@ import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 
+
+
 defineProps({
   fuelprices: Object,
-  posts: Object,
+  fueltypes: Object,
 });
 
 </script>
