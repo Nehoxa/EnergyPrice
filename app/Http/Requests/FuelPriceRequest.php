@@ -35,7 +35,6 @@ class FuelPriceRequest extends FormRequest
             'ville' => ['required'],
             'geom' => ['required'],
             'prix_maj' => ['required', 'date'],
-            'prix_id' => ['required', 'integer'],
             'prix_valeur' => ['required'],
             'fuel_type_id' => ['required', 'integer'],
             'com_arm_code' => ['required', 'integer'],

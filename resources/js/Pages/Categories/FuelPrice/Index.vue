@@ -19,6 +19,10 @@
       </div>
     </div>
 
+
+    <div class="flex m-3">
+      <TextInput @keyup="search" id="searchFuel" v-model="searchFuel" type="text" class="mx-3 mt-6" placeholder="Search..." />
+    </div>
     <div class="overflow-x-auto relative rounded-md m-6">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -67,7 +71,7 @@
               {{ fuelprice.ville }}
             </td>
             <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              <div v-for="fueltype in fueltypes" :key="fueltype.id" >
+              <div v-for="fueltype in fueltypes" :key="fueltype.id">
                 <div v-if="fueltype.id === fuelprice.FuelType">
                   {{ fueltype.name }}
                 </div>
@@ -90,13 +94,15 @@
             </td>
             <td class="py-4 px-6">
               <div class="flex justify-end">
-                <Link :href="route('fuelprice.edit', fuelprice.id)" class="pr-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-500">
-                  Modifier
+                <Link :href="route('fuelprice.edit', fuelprice.id)"
+                  class="pr-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-500">
+                Modifier
                 </Link>
                 <span> | </span>
-                <Link :href="route('fuelprice.destroy', fuelprice.id)" class="pl-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-red-500"
+                <Link :href="route('fuelprice.destroy', fuelprice.id)"
+                  class="pl-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-red-500"
                   method="delete" as="button" type="button">
-                  Supprimer
+                Supprimer
                 </Link>
               </div>
             </td>
@@ -112,15 +118,27 @@
 </template>
 <script setup>
 
+import { reactive, ref } from 'vue'
 import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import { Head, Link, router, useForm } from '@inertiajs/inertia-vue3';
+import TextInput from '@/Components/TextInput.vue';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+import { Inertia } from '@inertiajs/inertia';
 
-
-
-defineProps({
+const props = defineProps({
   fuelprices: Object,
   fueltypes: Object,
+  filters: Object,
 });
+
+const searchFuel = ref(props.filters.query ?? "")
+
+const search = function() {
+  Inertia.get(route('fuelprice.index', { query: searchFuel.value }), {}, {
+    replace: true,
+    preserveState: true
+  });
+}
 
 </script>

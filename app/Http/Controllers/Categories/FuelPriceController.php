@@ -19,11 +19,18 @@ class FuelPriceController extends Controller
      *
      * @return \Inertia\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $fueltypes = FuelType::all();
-        $fuelprices = FuelPriceResource::collection(FuelPrice::paginate(10));
-        return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'fueltypes'));
+        $filters = $request->all('query');
+
+        if ($request->filled('query')) {
+            $fuelprices = FuelPriceResource::collection(FuelPrice::search($filters['query'])->paginate(10));
+        } else {
+            $fuelprices = FuelPriceResource::collection(FuelPrice::paginate(10));
+        }
+
+        return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'fueltypes', 'filters'));
     }
 
     // /**
@@ -78,7 +85,6 @@ class FuelPriceController extends Controller
      */
     public function update(FuelPriceRequest $request, FuelPrice $fuelprice)
     {
-        dd('1234');
         $fuelprice->update($request->validated());
         return Redirect::route('fuelprice.index')->with(['message' => "Prix update !", 'class' => 'bg-green-100  text-green-700']);
     }

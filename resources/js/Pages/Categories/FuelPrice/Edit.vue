@@ -193,7 +193,6 @@ const props = defineProps({
 });
 
 const submit = () => {
-  console.log('coucou');
   form.put(route('fuelprice.update', props.fuelprice.id));
 };
 
