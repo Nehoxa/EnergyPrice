@@ -12,6 +12,8 @@ class FuelPrice extends Model
     use HasFactory;
     use Searchable;
 
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'pump',
         'cp',

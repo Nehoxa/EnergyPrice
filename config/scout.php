@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\ConsoElecGaz;
+
 return [
 
     /*
@@ -136,6 +138,9 @@ return [
             FuelPrice::class => [
                 'filterableAttributes'=> ['pump', 'cp', 'ville', 'prix_valeur', 'dep_name', 'dep_code', 'reg_name'],
                 // 'sortableAttributes' => ['created_at'],
+            ],
+            ConsoElecGaz::class => [
+                'filterableAttributes'=> ['id', 'operateur', 'annee', 'filiere', 'libelle_categorie_consommation', 'libelle_grand_secteur', 'conso', 'pdl', 'libelle_region', 'code_region'],
             ]
         ],
     ],

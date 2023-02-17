@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Categories\ConsoElecGazController;
 use App\Http\Controllers\Categories\FuelPriceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('fuelprice', FuelPriceController::class);
+    Route::resource('conso', ConsoElecGazController::class);
 });
 
 require __DIR__.'/auth.php';

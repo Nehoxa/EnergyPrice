@@ -7,9 +7,6 @@ use App\Models\FuelType;
 use Illuminate\Console\Command;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Ramsey\Uuid\Type\Integer;
-
-use function PHPUnit\Framework\isEmpty;
 
 class StoreFuelPrice extends Command
 {

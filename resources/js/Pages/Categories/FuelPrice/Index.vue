@@ -118,12 +118,11 @@
 </template>
 <script setup>
 
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import Pagination from '@/Components/Pagination.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link, router, useForm } from '@inertiajs/inertia-vue3';
+import { Head, Link } from '@inertiajs/inertia-vue3';
 import TextInput from '@/Components/TextInput.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 import { Inertia } from '@inertiajs/inertia';
 
 const props = defineProps({
