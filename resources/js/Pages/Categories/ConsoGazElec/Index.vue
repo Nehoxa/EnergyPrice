@@ -154,7 +154,6 @@ import { Head, Link } from '@inertiajs/inertia-vue3';
 import { ref } from 'vue'
 import { Inertia } from '@inertiajs/inertia';
 
-
 const props = defineProps({
   consomations: Object,
   categories: Array,
@@ -173,22 +172,42 @@ const searchPDL = ref("");
 const searchRegion = ref("");
 const searchCodeRegion = ref("");
 
-const search = function() {
-  Inertia.get(route('conso.index', { 
-      searchId: searchId.value, 
-      searchOp: searchOp.value, 
-      searchAnnee: searchAnnee.value,
-      searchfiliere: searchFiliere.value,
-      searchCategory: searchCategory.value,
-      searchSecteurs: searchSecteurs.value,
-      searchConso: searchConso.value,
-      searchPDL: searchPDL.value,
-      searchRegion: searchRegion.value,
-      searchCodeRegion: searchCodeRegion.value,
-    }), {}, {
+function debounce(func, timeout = 300) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
+function isNotNul(value) {
+  if (value) {
+    return value
+  }
+}
+
+const search = debounce(() => {
+  let searchParams = {
+    searchId: searchId.value,
+    searchOp: searchOp.value,
+    searchAnnee: searchAnnee.value,
+    searchfiliere: searchFiliere.value,
+    searchCategory: searchCategory.value,
+    searchSecteurs: searchSecteurs.value,
+    searchConso: searchConso.value,
+    searchPDL: searchPDL.value,
+    searchRegion: searchRegion.value,
+    searchCodeRegion: searchCodeRegion.value
+  };
+  for (let key in searchParams) {
+    if (!searchParams[key]) {
+      delete searchParams[key];
+    }
+  }
+  Inertia.get(route('conso.index', searchParams), {}, {
     replace: true,
     preserveState: true
   });
-}
+});
 
 </script>

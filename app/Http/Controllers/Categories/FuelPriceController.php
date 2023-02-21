@@ -30,6 +30,8 @@ class FuelPriceController extends Controller
             $fuelprices = FuelPriceResource::collection(FuelPrice::paginate(10));
         }
 
+        // dd($fuelprices);
+
         return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'fueltypes', 'filters'));
     }
 

@@ -32,10 +32,11 @@ class ConsoElecGazController extends Controller
                 ->where('pdl', 'LIKE', $request->searchPDL)
                 ->where('libelle_region', 'LIKE', '%' . $request->searchRegion . '%')
                 ->where('code_region', 'LIKE', $request->searchCodeRegion)
-            ->paginate(10));
+            ->paginate(15));
         } else {
             $consomations = ConsoElecGazResource::collection(ConsoElecGaz::paginate(15));
         }
+        // dd($consomations);
 
         return Inertia::render('Categories/ConsoGazElec/Index', compact('consomations', 'categories', 'filieres', 'secteurs'));
     }
