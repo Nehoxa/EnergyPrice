@@ -20,6 +20,7 @@ class ConsoElecGazController extends Controller
         $categories = ConsoElecGaz::category();
         $filieres = ConsoElecGaz::filiere();
         $secteurs = ConsoElecGaz::secteur();
+        $filters = $request->all();
 
         if ($request->filled('searchId') || $request->filled('searchOp') || $request->filled('searchAnnee') || $request->filled('searchfiliere') || $request->filled('searchCategory') || $request->filled('searchSecteurs') || $request->filled('searchConso') || $request->filled('searchPDL') || $request->filled('searchRegion') || $request->filled('searchCodeRegion')) {
             $consomations = ConsoElecGazResource::collection(ConsoElecGaz::where('id', 'LIKE', $request->searchId)
@@ -32,13 +33,23 @@ class ConsoElecGazController extends Controller
                 ->where('pdl', 'LIKE', $request->searchPDL)
                 ->where('libelle_region', 'LIKE', '%' . $request->searchRegion . '%')
                 ->where('code_region', 'LIKE', $request->searchCodeRegion)
-            ->paginate(15));
+            ->paginate(15)->appends([
+                'searchId' => $request->searchId,
+                'searchOp' => $request->searchOp,
+                'searchAnnee' => $request->searchAnnee,
+                'searchfiliere' => $request->searchfiliere,
+                'searchCategory' => $request->searchCategory,
+                'searchSecteurs' => $request->searchSecteurs,
+                'searchConso' => $request->searchConso,
+                'searchPDL' => $request->searchPDL,
+                'searchRegion' => $request->searchRegion,
+                'searchCodeRegion' => $request->searchCodeRegion
+            ]));
         } else {
             $consomations = ConsoElecGazResource::collection(ConsoElecGaz::paginate(15));
         }
-        // dd($consomations);
 
-        return Inertia::render('Categories/ConsoGazElec/Index', compact('consomations', 'categories', 'filieres', 'secteurs'));
+        return Inertia::render('Categories/ConsoGazElec/Index', compact('consomations', 'categories', 'filieres', 'secteurs', 'filters'));
     }
 
     /**

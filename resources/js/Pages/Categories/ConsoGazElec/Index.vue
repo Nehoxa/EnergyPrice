@@ -159,18 +159,19 @@ const props = defineProps({
   categories: Array,
   filieres: Array,
   secteurs: Array,
+  filters: Object,
 });
 
-const searchId = ref("");
-const searchOp = ref("");
-const searchAnnee = ref("");
-const searchFiliere = ref("");
-const searchCategory = ref("");
-const searchSecteurs = ref("");
-const searchConso = ref("");
-const searchPDL = ref("");
-const searchRegion = ref("");
-const searchCodeRegion = ref("");
+const searchId = ref(props.filters.searchId ?? "");
+const searchOp = ref(props.filters.searchOp ?? "");
+const searchAnnee = ref(props.filters.searchAnnee ?? "");
+const searchFiliere = ref(props.filters.searchFiliere ?? "");
+const searchCategory = ref(props.filters.searchCategory ?? "");
+const searchSecteurs = ref(props.filters.searchSecteurs ?? "");
+const searchConso = ref(props.filters.searchConso ?? "");
+const searchPDL = ref(props.filters.searchPDL ?? "");
+const searchRegion = ref(props.filters.searchRegion ?? "");
+const searchCodeRegion = ref(props.filters.searchCodeRegion ?? "");
 
 function debounce(func, timeout = 300) {
   let timer;
@@ -178,12 +179,6 @@ function debounce(func, timeout = 300) {
     clearTimeout(timer);
     timer = setTimeout(() => { func.apply(this, args); }, timeout);
   };
-}
-
-function isNotNul(value) {
-  if (value) {
-    return value
-  }
 }
 
 const search = debounce(() => {
