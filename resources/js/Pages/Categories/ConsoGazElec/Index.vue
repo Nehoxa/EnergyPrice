@@ -20,37 +20,130 @@
     </div>
 
     <div class="m-6 flex">
-      <input @keyup="search" id="searchId" v-model="searchId" type="text" placeholder="Id"
-        class="px-6 w-20 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm rounded-l-md" />
-      <input @keyup="search" id="searchOp" v-model="searchOp" type="text" placeholder="Operateur"
-        class="px-6 w-3/12 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
-      <input @keyup="search" id="searchAnnee" v-model="searchAnnee" type="number" placeholder="Année"
-        class="px-6 w-36 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
-      <select @change="search" id="searchFiliere" v-model="searchFiliere"
-        class="w-36 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
-        <option value="" selected disabled hidden>Filières</option>
-        <option v-for="filiere in filieres" :key="filiere.id" :value="filiere">{{ filiere }}</option>
-      </select>
-      <select @change="search" id="searchCategory" v-model="searchCategory"
-        class="w-80 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
-        <option value="" selected disabled hidden>Catégories</option>
-        <option v-for="categorie in categories" :key="categorie.id" :value="categorie">{{ categorie }}</option>
-      </select>
-      <select @change="search" id="searchSecteurs" v-model="searchSecteurs"
-        class="w-44 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
-        <option value="" selected disabled hidden>Secteurs</option>
-        <option v-for="secteur in secteurs" :key="secteur.id" :value="secteur">{{ secteur }}</option>
-      </select>
-      <input @keyup="search" id="searchConso" v-model="searchConso" type="text" placeholder="Consomation"
-        class="w-44 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
-      <input @keyup="search" id="searchPDL" v-model="searchPDL" type="text" placeholder="PDL"
-        class=" w-32 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
-      <input @keyup="search" id="searchRegion" v-model="searchRegion" type="text" placeholder="Région"
-        class="w-60 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
-      <input @keyup="search" id="searchCodeRegion" v-model="searchCodeRegion" type="text" placeholder="Code Régional"
-        class="w-40 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm rounded-r-md" />
-    </div>
 
+      <div class="input-wrapper">
+        <input @keyup="search" id="id" v-model="searchId" type="text" placeholder="Id"
+          class="px-6 w-20 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm rounded-l-md" />
+        <button @click="resetOption('searchId')" v-if="searchId" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper w-3/12">
+        <input @keyup="search" id="op" v-model="searchOp" type="text" placeholder="Operateur"
+          class="px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm w-full" />
+        <button @click="resetOption('searchOp')" v-if="searchOp" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <input @keyup="search" id="annee" v-model="searchAnnee" type="number" placeholder="Année"
+          class="px-6 w-36 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        <button @click="resetOption('searchAnnee')" v-if="searchAnnee" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <select @change="search" id="filiere" v-model="searchFiliere"
+          class="w-36 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+          <option value="" selected disabled hidden>Filières</option>
+          <option v-for="filiere in filieres" :key="filiere.id" :value="filiere">{{ filiere }}</option>
+        </select>
+        <button @click="resetOption('searchFiliere')" v-if="searchFiliere" class="reset-select">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <select @change="search" id="category" v-model="searchCategory"
+          class="w-80 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+          <option value="" selected disabled hidden>Catégories</option>
+          <option v-for="categorie in categories" :key="categorie.id" :value="categorie">{{
+            categorie
+          }}</option>
+        </select>
+        <button @click="resetOption('searchCategory')" v-if="searchCategory" class="reset-select">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <select @change="search" id="secteurs" v-model="searchSecteurs"
+          class="w-44 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm">
+          <option value="" selected disabled hidden>Secteurs</option>
+          <option v-for="secteur in secteurs" :key="secteur.id" :value="secteur">{{ secteur }}</option>
+        </select>
+        <button @click="resetOption('searchSecteurs')" v-if="searchSecteurs" class="reset-select">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <input @keyup="search" id="conso" v-model="searchConso" type="text" placeholder="Consomation"
+          class="w-44 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        <button @click="resetOption('searchConso')" v-if="searchConso" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="input-wrapper">
+        <input @keyup="search" id="searchPDL" v-model="searchPDL" type="text" placeholder="PDL"
+          class=" w-32 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        <button @click="resetOption('searchPDL')" v-if="searchPDL" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+
+      <div class="input-wrapper">
+        <input @keyup="search" id="region" v-model="searchRegion" type="text" placeholder="Région"
+          class="w-60 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm" />
+        <button @click="resetOption('searchRegion')" v-if="searchRegion" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+
+
+      <div class="input-wrapper">
+        <input @keyup="search" id="codeRegion" v-model="searchCodeRegion" type="text" placeholder="Code Régional"
+          class="w-40 px-6 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 shadow-sm rounded-r-md" />
+        <button @click="resetOption('searchCodeRegion')" v-if="searchCodeRegion" class="reset-input">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+            <path
+              d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+          </svg>
+        </button>
+      </div>
+    </div>
 
     <div class="overflow-x-auto relative rounded-md m-6">
       <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 table-fixed">
@@ -146,6 +239,7 @@
 
   </AuthenticatedLayout>
 </template>
+
 <script setup>
 
 import Pagination from '@/Components/Pagination.vue';
@@ -181,6 +275,11 @@ function debounce(func, timeout = 300) {
   };
 }
 
+function resetOption(option) {
+  this[option] = ""
+  search()
+}
+
 const search = debounce(() => {
   let searchParams = {
     searchId: searchId.value,
@@ -206,3 +305,45 @@ const search = debounce(() => {
 });
 
 </script>
+
+<style scoped>
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.reset-select {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  width: 20px;
+  /* Définissez la largeur de l'icône */
+  height: 20px;
+  /* Définissez la hauteur de l'icône */
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+.reset-input {
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  width: 20px;
+  /* Définissez la largeur de l'icône */
+  height: 20px;
+  /* Définissez la hauteur de l'icône */
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+}
+
+.reset-button svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+</style>

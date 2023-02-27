@@ -23,28 +23,31 @@ class ConsoElecGazController extends Controller
         $filters = $request->all();
 
         if ($request->filled('searchId') || $request->filled('searchOp') || $request->filled('searchAnnee') || $request->filled('searchfiliere') || $request->filled('searchCategory') || $request->filled('searchSecteurs') || $request->filled('searchConso') || $request->filled('searchPDL') || $request->filled('searchRegion') || $request->filled('searchCodeRegion')) {
-            $consomations = ConsoElecGazResource::collection(ConsoElecGaz::where('id', 'LIKE', $request->searchId)
+            $consomations = ConsoElecGazResource::collection(
+                ConsoElecGaz::where('id', 'LIKE', $request->searchId)
                 ->where('operateur', 'LIKE', '%' . $request->searchOp . '%')
                 ->where('annee', 'LIKE', $request->searchAnnee)
                 ->where('filiere', 'LIKE', $request->searchfiliere)
                 ->where('libelle_categorie_consommation', 'LIKE', $request->searchCategory)
                 ->where('libelle_grand_secteur', 'LIKE', $request->searchSecteurs)
-                ->where('conso', 'LIKE', $request->searchConso)
+                ->where('conso', 'LIKE', $request->searchConso . '%')
                 ->where('pdl', 'LIKE', $request->searchPDL)
                 ->where('libelle_region', 'LIKE', '%' . $request->searchRegion . '%')
                 ->where('code_region', 'LIKE', $request->searchCodeRegion)
-            ->paginate(15)->appends([
-                'searchId' => $request->searchId,
-                'searchOp' => $request->searchOp,
-                'searchAnnee' => $request->searchAnnee,
-                'searchfiliere' => $request->searchfiliere,
-                'searchCategory' => $request->searchCategory,
-                'searchSecteurs' => $request->searchSecteurs,
-                'searchConso' => $request->searchConso,
-                'searchPDL' => $request->searchPDL,
-                'searchRegion' => $request->searchRegion,
-                'searchCodeRegion' => $request->searchCodeRegion
-            ]));
+                ->paginate(15)
+                ->appends([
+                    'searchId' => $request->searchId,
+                    'searchOp' => $request->searchOp,
+                    'searchAnnee' => $request->searchAnnee,
+                    'searchfiliere' => $request->searchfiliere,
+                    'searchCategory'=> $request->searchCategory,
+                    'searchSecteurs' => $request->searchSecteurs,
+                    'searchConso' => $request->searchConso,
+                    'searchPDL' => $request->searchPDL,
+                    'searchRegion' => $request->searchRegion,
+                    'searchCodeRegion' => $request->searchCodeRegion
+                ])
+            );
         } else {
             $consomations = ConsoElecGazResource::collection(ConsoElecGaz::paginate(15));
         }
