@@ -35,6 +35,7 @@ class StoreFuelPrice extends Command
 
         $counter = 0;
 
+        /** @phpstan-ignore-next-line */
         $types = FuelType::all()->pluck('name', 'id');
 
         foreach ($worksheet->getRowIterator() as $row) {

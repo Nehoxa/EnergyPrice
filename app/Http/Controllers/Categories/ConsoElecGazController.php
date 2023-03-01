@@ -13,7 +13,7 @@ class ConsoElecGazController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Inertia\Response
      */
     public function index(Request $request)
     {
@@ -55,69 +55,69 @@ class ConsoElecGazController extends Controller
         return Inertia::render('Categories/ConsoGazElec/Index', compact('consomations', 'categories', 'filieres', 'secteurs', 'filters'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ConsoElecGaz  $consoElecGaz
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ConsoElecGaz $consoElecGaz)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\ConsoElecGaz  $consoElecGaz
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show(ConsoElecGaz $consoElecGaz)
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ConsoElecGaz  $consoElecGaz
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ConsoElecGaz $consoElecGaz)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  \App\Models\ConsoElecGaz  $consoElecGaz
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function edit(ConsoElecGaz $consoElecGaz)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ConsoElecGaz  $consoElecGaz
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ConsoElecGaz $consoElecGaz)
-    {
-        //
-    }
+    // /**
+    //  * Update the specified resource in storage.
+    //  *
+    //  * @param  \Illuminate\Http\Request  $request
+    //  * @param  \App\Models\ConsoElecGaz  $consoElecGaz
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function update(Request $request, ConsoElecGaz $consoElecGaz)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ConsoElecGaz  $consoElecGaz
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ConsoElecGaz $consoElecGaz)
-    {
-        //
-    }
+    // /**
+    //  * Remove the specified resource from storage.
+    //  *
+    //  * @param  \App\Models\ConsoElecGaz  $consoElecGaz
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function destroy(ConsoElecGaz $consoElecGaz)
+    // {
+    //     //
+    // }
 }

@@ -30,8 +30,6 @@ class FuelPriceController extends Controller
             $fuelprices = FuelPriceResource::collection(FuelPrice::paginate(10));
         }
 
-        // dd($fuelprices);
-
         return Inertia::render('Categories/FuelPrice/Index', compact('fuelprices', 'fueltypes', 'filters'));
     }
 
@@ -82,8 +80,9 @@ class FuelPriceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\FuelPriceRequest  $request
      * @param  \App\Models\FuelPrice  $fuelprice
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(FuelPriceRequest $request, FuelPrice $fuelprice)
     {
@@ -95,7 +94,7 @@ class FuelPriceController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\FuelPrice  $fuelprice
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(FuelPrice $fuelprice): RedirectResponse
     {

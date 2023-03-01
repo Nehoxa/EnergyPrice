@@ -47,17 +47,27 @@ class FuelPrice extends Model
         'prix_maj' => 'datetime',
     ];
 
+    /**
+     * return default index for laravel scout
+     *
+     * @return string
+     */
     public function searchableAs()
     {
         return 'fuelprices_index';
     }
 
-    public function toSearchableArray()
+    /**
+     * Return searchable array for laravel scout
+     *
+     * @return array<string, float|int|string|null>
+     */
+    public function toSearchableArray(): array
     {
         return [
             'pump' => (int) $this->pump,
             'cp' => (int) $this->cp,
-            'fuel_type_id' => $this->fuelType('name'),
+            'fuel_type_id' => (int) $this->fuel_type_id,
             'ville' => $this->ville,
             'prix_valeur' => (float) $this->prix_valeur,
             'dep_name' => $this->dep_name,
@@ -66,6 +76,11 @@ class FuelPrice extends Model
         ];
     }
 
+    /**
+     * retrun defalut key for laravel scout
+     *
+     * @return int|null
+     */
     public function getScoutKey()
     {
         return $this->pump;
