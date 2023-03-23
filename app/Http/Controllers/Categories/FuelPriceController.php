@@ -87,7 +87,7 @@ class FuelPriceController extends Controller
     public function update(FuelPriceRequest $request, FuelPrice $fuelprice)
     {
         $fuelprice->update($request->validated());
-        return Redirect::route('fuelprice.index')->with(['message' => "Prix update !", 'class' => 'bg-green-100  text-green-700']);
+        return Redirect::route('fuelprice.index')->with(['message' => 'updated']);
     }
 
     /**
@@ -99,6 +99,6 @@ class FuelPriceController extends Controller
     public function destroy(FuelPrice $fuelprice): RedirectResponse
     {
         $fuelprice->delete();
-        return Redirect::route('fuelprice.index')->with(['message' => "Prix delete !", 'class' => 'bg-red-100  text-red-700']);
+        return Redirect::route('fuelprice.index')->with(['message' => 'deleted']);
     }
 }

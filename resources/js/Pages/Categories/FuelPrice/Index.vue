@@ -7,18 +7,7 @@
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">Prix Carburant</h2>
     </template>
 
-    <div v-if="$page.props.flash.message" class="flex rounded-lg p-4 mb-4 text-sm" :class="$page.props.flash.class"
-      role="alert">
-      <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-          clip-rule="evenodd"></path>
-      </svg>
-      <div>
-        <span class="font-medium">{{ $page.props.flash.message }}</span>
-      </div>
-    </div>
-
+    <Message :message="$page.props.flash.message" />
 
     <div class="flex m-3">
       <TextInput @keyup="search" id="searchFuel" v-model="searchFuel" type="text" class="mx-3 mt-6" placeholder="Search..." />
@@ -124,6 +113,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 import TextInput from '@/Components/TextInput.vue';
 import { Inertia } from '@inertiajs/inertia';
+import Message from '@/Components/Message.vue';
 
 const props = defineProps({
   fuelprices: Object,
