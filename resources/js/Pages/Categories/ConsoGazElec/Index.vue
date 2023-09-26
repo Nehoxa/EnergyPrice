@@ -192,8 +192,8 @@
             <th scope="col" class="w-40 py-3 px-6">
               Code Régional
             </th>
-            <th>
-            </th>
+            <!-- <th>
+            </th> -->
           </tr>
         </thead>
         <tbody v-for="consomation in consomations.data" :key="consomation.id">
@@ -228,7 +228,7 @@
             <td class="w-40 py-4 px-6">
               {{ consomation.codeRegion }}
             </td>
-            <td class="py-4 px-6">
+            <!-- <td class="py-4 px-6">
               <div class="flex justify-end">
                 <Link :href="route('conso.edit', consomation.id)"
                   class="pr-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-500">
@@ -241,7 +241,7 @@
                 Supprimer
                 </Link>
               </div>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>

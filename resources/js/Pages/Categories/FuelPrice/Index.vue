@@ -43,9 +43,9 @@
             <th scope="col" class="py-3 px-6">
               Date
             </th>
-            <th>
+            <!-- <th>
 
-            </th>
+            </th> -->
           </tr>
         </thead>
         <tbody v-for="fuelprice in fuelprices.data" :key="fuelprice.id">
@@ -81,7 +81,7 @@
             <td class="py-4 px-6">
               {{ fuelprice.prixMaj }}
             </td>
-            <td class="py-4 px-6">
+            <!-- <td class="py-4 px-6">
               <div class="flex justify-end">
                 <Link :href="route('fuelprice.edit', fuelprice.id)"
                   class="pr-2 hover:underline text-gray-900 whitespace-nowrap dark:text-white hover:text-blue-500">
@@ -94,7 +94,7 @@
                 Supprimer
                 </Link>
               </div>
-            </td>
+            </td> -->
           </tr>
         </tbody>
       </table>
